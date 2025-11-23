@@ -469,7 +469,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // 为所有关闭按钮添加点击事件监听器
   const closeButtons = document.querySelectorAll('.modal-close');
   closeButtons.forEach(button => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const modal = this.closest('.modal-overlay');
+      closeModal(modal);
+    });
+    
+    // 移动端触摸事件支持
+    button.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       const modal = this.closest('.modal-overlay');
       closeModal(modal);
     });

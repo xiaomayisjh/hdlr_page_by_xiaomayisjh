@@ -942,6 +942,10 @@ body {
   /* 过渡效果 */
   transition: opacity var(--transition-normal) var(--easing-standard),
               visibility var(--transition-normal) var(--easing-standard);
+  
+  /* 防止背景滚动穿透 */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 弹窗显示状态 */
@@ -969,6 +973,7 @@ body {
   /* 最大高度 */
   max-height: 80vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   
   /* 相对定位（用于关闭按钮） */
   position: relative;
@@ -987,6 +992,9 @@ body {
   /* 过渡效果 */
   transition: transform 0.4s var(--easing-bounce),
               opacity 0.4s var(--easing-standard);
+  
+  /* 防止滚动穿透到背景 */
+  overscroll-behavior: contain;
 }
 
 /* 弹窗显示时的容器状态 */
@@ -1033,6 +1041,14 @@ body {
   /* 去除默认样式 */
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  
+  /* 移动端触摸优化 */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  
+  /* 确保在最上层 */
+  z-index: 10;
 }
 
 /* 关闭按钮悬停效果 */
@@ -1296,13 +1312,20 @@ body {
   /* 弹窗调整为接近全屏 */
   .modal-overlay {
     padding: var(--spacing-sm);
+    /* 移动端确保遮罩层可以滚动 */
+    overflow-y: auto;
+    align-items: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   
   .modal-container {
     /* 移动端接近全屏 90% */
     max-width: 95%;
-    max-height: 90vh;
+    max-height: none;
     border-radius: 16px;
+    /* 移动端自适应内容高度 */
+    margin: auto 0;
   }
   
   .modal-content {
@@ -1321,11 +1344,14 @@ body {
   
   /* 增大关闭按钮的可点击区域 */
   .modal-close {
-    width: 40px;
-    height: 40px;
-    font-size: 26px;
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
     top: 12px;
     right: 12px;
+    /* 确保触摸事件正常工作 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
   }
   
   /* 移动端页脚样式 */
