@@ -1,4 +1,150 @@
 // ===================================
+// 主题管理器
+// ===================================
+// 将 ThemeManager 定义为全局类，以便在测试中使用
+window.ThemeManager = class ThemeManager {
+  constructor() {
+    this.storageKey = 'user-theme-preference';
+    this.defaultTheme = 'dark';
+    this.themes = ['light', 'dark'];
+  }
+
+  /**
+   * 获取当前主题
+   * @returns {string} 当前主题 ('light' 或 'dark')
+   */
+  getCurrentTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    return currentTheme || this.defaultTheme;
+  }
+
+  /**
+   * 设置主题
+   * @param {string} theme - 要设置的主题 ('light' 或 'dark')
+   */
+  setTheme(theme) {
+    // 验证主题值
+    if (!this.themes.includes(theme)) {
+      console.warn(`无效的主题值: ${theme}，使用默认主题`);
+      theme = this.defaultTheme;
+    }
+    
+    // 更新 DOM 的 data-theme 属性
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+
+  /**
+   * 切换主题（在浅色和深色之间切换）
+   */
+  toggle() {
+    const currentTheme = this.getCurrentTheme();
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    this.setTheme(newTheme);
+    this.saveToStorage(newTheme);
+    return newTheme;
+  }
+
+  /**
+   * 获取系统主题偏好
+   * @returns {string} 系统偏好的主题 ('light' 或 'dark')
+   */
+  getSystemPreference() {
+    // 检测系统是否偏好深色模式
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    // 检测系统是否偏好浅色模式
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light';
+    }
+    // 如果无法检测，返回默认主题
+    return this.defaultTheme;
+  }
+
+  /**
+   * 保存主题到本地存储
+   * @param {string} theme - 要保存的主题
+   */
+  saveToStorage(theme) {
+    try {
+      localStorage.setItem(this.storageKey, theme);
+    } catch (e) {
+      console.warn('无法保存主题到 localStorage:', e);
+    }
+  }
+
+  /**
+   * 从本地存储读取主题
+   * @returns {string|null} 保存的主题或 null
+   */
+  loadFromStorage() {
+    try {
+      const savedTheme = localStorage.getItem(this.storageKey);
+      // 验证读取的值
+      if (savedTheme && this.themes.includes(savedTheme)) {
+        return savedTheme;
+      }
+      // 如果值无效，清除它
+      if (savedTheme) {
+        localStorage.removeItem(this.storageKey);
+      }
+      return null;
+    } catch (e) {
+      console.warn('无法从 localStorage 读取主题:', e);
+      return null;
+    }
+  }
+
+  /**
+   * 初始化主题系统
+   */
+  init() {
+    // 优先级 1: 从 localStorage 读取用户偏好
+    let theme = this.loadFromStorage();
+    
+    // 优先级 2: 使用系统偏好
+    if (!theme) {
+      theme = this.getSystemPreference();
+    }
+    
+    // 优先级 3: 使用默认主题（已在 getSystemPreference 中处理）
+    
+    // 应用主题
+    this.setTheme(theme);
+  }
+}
+
+// ===================================
+// 主题切换功能
+// ===================================
+document.addEventListener('DOMContentLoaded', function() {
+  // 初始化主题管理器
+  const themeManager = new ThemeManager();
+  themeManager.init();
+  
+  // 获取主题切换按钮
+  const themeToggleButton = document.querySelector('.theme-toggle');
+  
+  if (themeToggleButton) {
+    // 添加点击事件监听器
+    themeToggleButton.addEventListener('click', function() {
+      themeManager.toggle();
+      // 图标显示由 CSS 通过 data-theme 属性自动控制，无需手动更新
+    });
+    
+    // 添加键盘事件支持（Enter 和 Space 键）
+    themeToggleButton.addEventListener('keydown', function(e) {
+      // Enter 键（keyCode 13）或 Space 键（keyCode 32）
+      if (e.key === 'Enter' || e.key === ' ' || e.keyCode === 13 || e.keyCode === 32) {
+        e.preventDefault(); // 防止 Space 键滚动页面
+        themeManager.toggle();
+        // 图标显示由 CSS 通过 data-theme 属性自动控制，无需手动更新
+      }
+    });
+  }
+});
+
+// ===================================
 // 页面加载动画序列控制器
 // ===================================
 document.addEventListener('DOMContentLoaded', function() {

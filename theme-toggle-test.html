@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题切换测试</title>
+    <style>
+        /* 简化的主题变量 */
+        :root {
+            --color-bg: #1a1a1a;
+            --color-text: #ffffff;
+        }
+
+        [data-theme="light"] {
+            --color-bg: #f5f5f7;
+            --color-text: #1d1d1f;
+        }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .theme-toggle:focus {
+            outline: 2px solid #007AFF;
+            outline-offset: 3px;
+        }
+
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transition: all 0.3s ease;
+            position: absolute;
+        }
+
+        /* 默认深色主题显示太阳图标 */
+        .sun-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .moon-icon {
+            opacity: 0;
+            transform: rotate(180deg) scale(0);
+        }
+
+        /* 浅色主题显示月亮图标 */
+        [data-theme="light"] .sun-icon {
+            opacity: 0;
+            transform: rotate(-180deg) scale(0);
+        }
+
+        [data-theme="light"] .moon-icon {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .status p {
+            margin: 10px 0;
+        }
+
+        .status strong {
+            color: #007AFF;
+        }
+    </style>
+</head>
+<body>
+    <!-- 主题切换按钮 -->
+    <button class="theme-toggle" aria-label="切换主题" title="切换主题">
+        <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+        </svg>
+        <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+        </svg>
+    </button>
+
+    <div class="container">
+        <h1>主题切换测试</h1>
+        <p>点击右上角的按钮切换主题</p>
+        <p>或者使用键盘：Tab 键聚焦按钮，然后按 Enter 或 Space 键</p>
+
+        <div class="status">
+            <p><strong>当前主题：</strong><span id="current-theme">加载中...</span></p>
+            <p><strong>localStorage：</strong><span id="storage-theme">加载中...</span></p>
+            <p><strong>data-theme 属性：</strong><span id="data-theme-attr">加载中...</span></p>
+        </div>
+    </div>
+
+    <script>
+        // ThemeManager 类
+        window.ThemeManager = class ThemeManager {
+          constructor() {
+            this.storageKey = 'user-theme-preference';
+            this.defaultTheme = 'dark';
+            this.themes = ['light', 'dark'];
+          }
+
+          getCurrentTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            return currentTheme || this.defaultTheme;
+          }
+
+          setTheme(theme) {
+            if (!this.themes.includes(theme)) {
+              console.warn(`无效的主题值: ${theme}，使用默认主题`);
+              theme = this.defaultTheme;
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+          }
+
+          toggle() {
+            const currentTheme = this.getCurrentTheme();
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            this.setTheme(newTheme);
+            this.saveToStorage(newTheme);
+            return newTheme;
+          }
+
+          getSystemPreference() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              return 'dark';
+            }
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+              return 'light';
+            }
+            return this.defaultTheme;
+          }
+
+          saveToStorage(theme) {
+            try {
+              localStorage.setItem(this.storageKey, theme);
+            } catch (e) {
+              console.warn('无法保存主题到 localStorage:', e);
+            }
+          }
+
+          loadFromStorage() {
+            try {
+              const savedTheme = localStorage.getItem(this.storageKey);
+              if (savedTheme && this.themes.includes(savedTheme)) {
+                return savedTheme;
+              }
+              if (savedTheme) {
+                localStorage.removeItem(this.storageKey);
+              }
+              return null;
+            } catch (e) {
+              console.warn('无法从 localStorage 读取主题:', e);
+              return null;
+            }
+          }
+
+          init() {
+            let theme = this.loadFromStorage();
+            if (!theme) {
+              theme = this.getSystemPreference();
+            }
+            this.setTheme(theme);
+          }
+        }
+
+        // 主题切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+          // 初始化主题管理器
+          const themeManager = new ThemeManager();
+          themeManager.init();
+          
+          // 获取主题切换按钮
+          const themeToggleButton = document.querySelector('.theme-toggle');
+          
+          // 更新状态显示
+          function updateStatus() {
+            document.getElementById('current-theme').textContent = themeManager.getCurrentTheme();
+            document.getElementById('storage-theme').textContent = localStorage.getItem('user-theme-preference') || '无';
+            document.getElementById('data-theme-attr').textContent = document.documentElement.getAttribute('data-theme') || '无';
+          }
+          
+          // 初始化状态显示
+          updateStatus();
+          
+          if (themeToggleButton) {
+            // 添加点击事件监听器
+            themeToggleButton.addEventListener('click', function() {
+              themeManager.toggle();
+              updateStatus();
+              console.log('主题已切换为:', themeManager.getCurrentTheme());
+            });
+            
+            // 添加键盘事件支持（Enter 和 Space 键）
+            themeToggleButton.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter' || e.key === ' ' || e.keyCode === 13 || e.keyCode === 32) {
+                e.preventDefault();
+                themeManager.toggle();
+                updateStatus();
+                console.log('主题已切换为:', themeManager.getCurrentTheme());
+              }
+            });
+          }
+        });
+    </script>
+</body>
+</html>
