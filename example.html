@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寒冬利刃</title>
+    <link rel="icon" href="https://q.qlogo.cn/headimg_dl?dst_uin=1079489986&spec=640&img_type=jpg">
+    <meta name="keyword" content="寒冬利刃,hdlr,handongliren,一只IT萌新">
+    <meta name="description" content="寒冬利刃|一只IT萌新，会一点点Bootstrap和Python。|Stay hungry.Stay foolish.">
+    <meta name="author" content="寒冬利刃,1079489986@qq.com">
+    <meta name="copyright" content="Copyrights © 2025 寒冬利刃.All Rights Reserved.">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        @font-face {
+            font-family: "CGH"; 
+            src: url("./static/font/CGH.ttf"); 
+            font-weight: normal; 
+        }
+
+        * {
+            font-family: "CGH";
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(45deg, #000, #1a1a1a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); 
+            width: 60%; 
+            max-width: 600px; 
+            min-width: 400px; 
+        }
+
+        .light {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0, rgba(255, 255, 255, 0) 70%);
+            filter: blur(10px);
+            animation: move 15s infinite linear;
+            opacity: 0.3
+        }
+
+        .light:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.8) 0, rgba(100, 200, 255, 0) 70%);
+            animation-delay: 0s
+        }
+
+        .light:nth-child(2) {
+            top: 60%;
+            left: 50%;
+            background: radial-gradient(circle, rgba(255, 100, 200, 0.8) 0, rgba(255, 100, 200, 0) 70%);
+            animation-delay: -5s
+        }
+
+        .light:nth-child(3) {
+            top: 30%;
+            left: 80%;
+            background: radial-gradient(circle, rgba(100, 255, 200, 0.8) 0, rgba(100, 255, 200, 0) 70%);
+            animation-delay: -10s
+        }
+
+        @keyframes move {
+            0% {
+                transform: translate(0, 0)
+            }
+
+            25% {
+                transform: translate(100px, 50px)
+            }
+
+            50% {
+                transform: translate(50px, 100px)
+            }
+
+            75% {
+                transform: translate(-50px, 50px)
+            }
+
+            100% {
+                transform: translate(0, 0)
+            }
+        }
+
+        .card * {
+            text-shadow: 0 0 10px var(--bs-white); 
+        }
+
+        .card .text-primary {
+            text-shadow: 0 0 10px var(--bs-primary); 
+        }
+
+        .card .link-primary {
+            text-shadow: 0 0 10px var(--bs-primary); 
+        }
+
+        .btn-outline-light svg {
+            filter: drop-shadow(0 0 10px var(--bs-light));
+        }
+
+        .btn-outline-light svg {
+            fill: var(--bs-light); 
+        }
+
+        .btn-outline-light:hover svg {
+            fill: var(--bs-black); 
+        }
+
+        .btn-outline-light:active svg {
+            fill: var(--bs-black); 
+        }
+
+        .btn-outline-light:focus svg {
+            fill: var(--bs-black); 
+        }
+
+        .card {
+            opacity: 0; 
+        }
+
+        .card * {
+            opacity: 0; 
+        }
+
+        .modal {
+            opacity: 1;
+        }
+
+        .modal * {
+            opacity: 1;
+        }
+
+        .div-a {
+            min-width: 100%; 
+            color: white; 
+            text-decoration: none; 
+        }; 
+    </style>
+</head>
+
+<body>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="card card-body mx-auto bg-dark text-white">
+        <div class="text-center">
+            <img id="avatar" class="rounded-circle" alt="寒冬利刃" src="https://q.qlogo.cn/headimg_dl?dst_uin=1079489986&spec=640&img_type=jpg" height="100" width="100">
+            <h1 id="nick">寒冬利刃</h1>
+            <p id="skill">
+                一只
+                <b class="text-primary">IT萌新</b>
+                ，会一点点
+                <b class="text-primary">Bootstrap</b>
+                和
+                <b class="text-primary">Python</b>
+                。
+            </p>
+            <p id="saying">Stay hungry.Stay foolish.</p>
+            <div class="contact">
+                <a class="float-2 btn btn-outline-light" href="mailto: 1079489986@qq.ocm" target="_blank">
+                    <i class="bi bi-envelope"></i>
+                    邮箱
+                </a>
+                <a class="float-1 btn btn-outline-light" href="https://gitee.com/handongliren" target="_blank">
+                    <svg width="1rem" height="1rem" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.016 0zm6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.63c0 .327.266.592.593.592h5.63c.982 0 1.778-.796 1.778-1.778v-.296a.593.593 0 0 0-.592-.593h-4.15a.592.592 0 0 1-.592-.592v-1.482a.593.593 0 0 1 .593-.592h6.815c.327 0 .593.265.593.592v3.408a4 4 0 0 1-4 4H5.926a.593.593 0 0 1-.593-.593V9.778a4.444 4.444 0 0 1 4.445-4.444h8.296z"></path></svg>
+                    Gitee
+                </a>
+                <a class="float-1 btn btn-outline-light" href="https://www.cnblogs.com/hdlr" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" with="1rem" height="1rem"><defs><clipPath id="prefix__clip-path"><path class="prefix__cls-1" d="M29.48 25.24c-.16-1.89-.08-1.5-.24-3.16a72.24 72.24 0 00-2-10.37L26 6.25l-2.6 5.41-.44.89q-.24.48-.54 1a20.43 20.43 0 01-1.24 1.84 20.08 20.08 0 01-3.08 3.24 19.72 19.72 0 01-3.87 2.53c-.72.33-1.45.71-2.23 1-.34.14-1.19.44-1.93.66a2.55 2.55 0 01-1.07-.3c-.34-1-.83-2.24-1.2-3.19-.5-1.25-1-2.5-1.51-3.73a59.11 59.11 0 00-3.62-7.25 59.82 59.82 0 001.51 7.94c.3 1.3.7 2.58 1.05 3.87S6 22.71 6.44 24a1.4 1.4 0 001.29.93c1.28 0 2.57.06 3.86.05s2.59 0 3.88-.11a56 56 0 007.79-.87c-1.92-.49-7.5-.81-10.79-1.06a43 43 0 006.53-1.7 24.06 24.06 0 005.38-3.45c.71-.62 1.21 1.88 2.39 5.27.62 1.69.34 1 1 2.66s1.37 4.38 2.17 6c-.07-1.82-.31-4.67-.46-6.48z"/></clipPath><clipPath id="prefix__clip-path-2"><path class="prefix__cls-1" d="M20.92 3.46a4.25 4.25 0 01.31 5.86 3.91 3.91 0 01-5.66.24 4.25 4.25 0 01-.31-5.86 3.91 3.91 0 015.66-.24m1.35-1.54a5.89 5.89 0 00-8.53.36 6.41 6.41 0 00.48 8.83 5.91 5.91 0 008.53-.36 6.41 6.41 0 00-.48-8.83z"/></clipPath></defs><g style="isolation:isolate"><g id="prefix__layer_1" data-name="layer 1"><path class="prefix__cls-1" d="M29.48 25.24c-.16-1.89-.08-1.5-.24-3.16a72.24 72.24 0 00-2-10.37L26 6.25l-2.6 5.41-.44.89q-.24.48-.54 1a20.43 20.43 0 01-1.24 1.84 20.08 20.08 0 01-3.08 3.24 19.72 19.72 0 01-3.87 2.53c-.72.33-1.45.71-2.23 1-.34.14-1.19.44-1.93.66a2.55 2.55 0 01-1.07-.3c-.34-1-.83-2.24-1.2-3.19-.5-1.25-1-2.5-1.51-3.73a59.11 59.11 0 00-3.62-7.25 59.82 59.82 0 001.51 7.94c.3 1.3.7 2.58 1.05 3.87S6 22.71 6.44 24a1.4 1.4 0 001.29.93c1.28 0 2.57.06 3.86.05s2.59 0 3.88-.11a56 56 0 007.79-.87c-1.92-.49-7.5-.81-10.79-1.06a43 43 0 006.53-1.7 24.06 24.06 0 005.38-3.45c.71-.62 1.21 1.88 2.39 5.27.62 1.69.34 1 1 2.66s1.37 4.38 2.17 6c-.07-1.82-.31-4.67-.46-6.48z"/><g clip-path="url(#prefix__clip-path)"><path class="prefix__cls-1" d="M-.87-.78h34.42v33.07H-.87z"/></g><path class="prefix__cls-1" d="M20.92 3.46a4.25 4.25 0 01.31 5.86 3.91 3.91 0 01-5.66.24 4.25 4.25 0 01-.31-5.86 3.91 3.91 0 015.66-.24m1.35-1.54a5.89 5.89 0 00-8.53.36 6.41 6.41 0 00.48 8.83 5.91 5.91 0 008.53-.36 6.41 6.41 0 00-.48-8.83z"/><g clip-path="url(#prefix__clip-path-2)"><path class="prefix__cls-1" d="M-.87-.78h34.42v33.07H-.87z"/></g></g></g></svg>
+                    博客园
+                </a>
+                <a class="float-2 btn btn-outline-light" href="https://qm.qq.com/q/yVuly2YlJ8" target="_blank">
+                    <i class="bi bi-tencent-qq"></i>
+                    QQ
+                </a>
+            </div>
+            <hr id="divider" class="divider">
+            <p id="foot">
+                <a id="link-link" class="link-primary" href="javascript: $('#about').modal('show'); ">关于本站</a>
+                |
+                <a id="link-link" class="link-primary" href="javascript: $('#link').modal('show'); ">友链</a>
+                |
+                <a id="note-link" class="link-primary" href="javascript: $('#note').modal('show'); ">后记</a>
+            </p>
+            <div class="modals">
+                <div class="modal fade" id="about" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content bg-dark text-white text-start">
+                            <div class="modal-header" data-bs-theme="dark">
+                                <h1 class="modal-title fs-5">
+                                    <i class="bi bi-card-list"></i>
+                                    关于本站
+                                </h1>
+                                <button class="btn-close" title="关闭" data-bs-dismiss="modal" aria-label="关闭"></button>
+                            </div>
+                            <div class="modal-body">
+                                <b>本站名称</b>
+                                <br>
+                                <span>寒冬利刃</span>
+                                <hr class="divider">
+                                <b>本站站长</b>
+                                <br>
+                                <span>寒冬利刃</span>
+                                <hr class="divider">
+                                <b>本站类型</b>
+                                <br>
+                                <span>个人社交主页</span>
+                                <hr class="divider">
+                                <b>本站网址</b>
+                                <br>
+                                <span>https://hdlr.maozi.io/</span>
+                                <hr class="divider">
+                                <b>本站图标</b>
+                                <br>
+                                <img class="rounded" src="https://q.qlogo.cn/headimg_dl?dst_uin=1079489986&spec=640&img_type=jpg" width="32" height="32">
+                                <br>
+                                <a class="link-primary" href="https://q.qlogo.cn/headimg_dl?dst_uin=1079489986&spec=640&img_type=jpg" target="_blank">https://q.qlogo.cn/headimg_dl?dst_uin=1079489986&spec=640&img_type=jpg</a>
+                                <hr class="divider">
+                                <b>本站简介</b>
+                                <br>
+                                <span>寒冬利刃|一只IT萌新，会一点点Bootstrap和Python。|Stay hungry.Stay foolish.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="modal fade" id="link" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content bg-dark text-white text-start">
+                            <div class="modal-header" data-bs-theme="dark">
+                                <h1 class="modal-title fs-5">
+                                    <i class="bi bi-person-vcard"></i>
+                                    友链
+                                </h1>
+                                <button class="btn-close" title="关闭" data-bs-dismiss="modal" aria-label="关闭"></button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="mx-auto card bg-dark text-white" style="width: 95%; ">
+                                    <div class="card-header">
+                                        <i class="bi bi-person-add"></i>
+                                        添加友链
+                                    </div>
+                                    <div class="card-body">
+                                        <span>
+                                            请贵站
+                                            <strong class="text-primary">先添加本站友链</strong>
+                                            ，再将贵站信息发送至
+                                            <a class="link-primary" style="text-decoration: underline; " href="mailto: 1079489986@qq.com">1079489986@qq.com</a>
+                                            。
+                                        </span>
+                                        <hr class="divider">
+                                        <small class="text-secondary">
+                                            <i class="bi bi-info-circle"></i>
+                                            本站信息和贵站应发送的信息格式参见
+                                            <a class="link-primary" style="text-decoration: underline; "  href="javascript: $('#link').modal('hide'); javascript: $('#about').modal('show'); ">关于本站</a>
+                                            。
+                                        </small>
+                                    </div>
+                                </div>
+                                <br>
+                                <a class="div-a" href="https://xiaomayisjh.github.io/" target="_blank">
+                                    <div class="mx-auto card card-body bg-dark text-white">
+                                        <div class="row-cols-12">
+                                            <div class="col-md-3 col-sm-6 d-flex justify-content-center align-items-center">
+                                                <img class="rounded" alt="小蚂蚁"
+                                                    src="https://q.qlogo.cn/headimg_dl?dst_uin=36949637&spec=640&img_type=jpg"
+                                                    style="width: 90%; max-width: 100px; ">
+                                            </div>
+                                            <div class="col-md-9 col-sm-12">
+                                                <div style="width: 90%; ">
+                                                    <h4>小蚂蚁</h4>
+                                                    <small class="text-primary">xiaomayisjh.github.io</small>
+                                                    <br>
+                                                    <small>树不要皮必死，人不要脸无敌！</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="note" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content bg-dark text-white text-start">
+                            <div class="modal-header" data-bs-theme="dark">
+                                <h1 class="modal-title fs-5">
+                                    <i class="bi bi-journal"></i>
+                                    后记
+                                </h1>
+                                <button class="btn-close" title="关闭" data-bs-dismiss="modal" aria-label="关闭"></button>
+                            </div>
+                            <div class="modal-body">
+                                <span>
+                                    当初，
+                                    <b class="text-primary">本来做了个别的主页</b>
+                                    ，后来用博客园发文章了，我嫌原来的功能太花，于是
+                                    <b class="text-primary">写了现在这个主页</b>
+                                    。
+                                    写动画的时候，
+                                    <b class="text-primary">看了一下Apple的动画</b>
+                                    ，Apple一如既往美观。
+                                </span>
+                                <br>
+                                <div class="text-end">
+                                    <small>——寒冬利刃</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <small id="copyright">Copyrights © 2025 寒冬利刃.All Rights Reserved.</small>
+        </div>
+    </div>
+    <script>
+        function start() {
+            console.log("1"); 
+            $(".card").stop().animate({opacity: 1}, 500); 
+            $(".text-center").stop().animate({opacity: 1}, 500, () => {
+                console.log("2"); 
+                $("#avatar").stop().animate({opacity: 1}, 500, () => {
+                    console.log("3"); 
+                    $("#nick").stop().animate({opacity: 1}, 300); 
+                    $("#skill").stop().animate({opacity: 1}, 300, () => {
+                        console.log("4"); 
+                        $("#skill *").stop().animate({opacity: 1}, 200, () => {
+                            console.log("5"); 
+                            $("#saying").stop().animate({opacity: 1}, 300, () => {
+                                console.log("6"); 
+                                $(".contact").stop().animate({opacity: 1}, 300); 
+                                $(".contact *").stop().animate({opacity: 1}, 300, ()=> {
+                                    console.log("7"); 
+                                    $("#divider").stop().animate({opacity: 1}, 200); 
+                                    $("#foot").stop().animate({opacity: 1}, 200); 
+                                    $("#foot *").stop().animate({opacity: 1}, 200); 
+                                    $(".modals").stop().animate({opacity: 1}, 200); 
+                                    $(".modals *").stop().animate({opacity: 1}, 200); 
+                                    $("#copyright").stop().animate({opacity: 1}, 200, () => {
+                                        console.log("8"); 
+                                        $(".contact svg").stop().animate({width: "1.5rem", height: "1.5rem"}, 500); 
+                                        $(".contact *").stop().animate({fontSize: "1.5rem"}, 500, () => {
+                                            console.log("9"); 
+                                            $(".float-1 svg").stop().animate({width: "1rem", height: "1rem"}, 300); 
+                                            $(".float-1").stop().animate({fontSize: "1rem"}, 300); 
+                                            $(".float-1 *").stop().animate({fontSize: "1rem"}, 300, () => {
+                                                console.log("10"); 
+                                                $(".float-2").stop().animate({fontSize: "1rem"}, 300); 
+                                                $(".float-2 *").stop().animate({fontSize: "1rem"}, 300); 
+                                                $(".card").stop(); 
+                                            }); 
+                                        }); 
+                                    }); 
+                                }); 
+                            }); 
+                        }); 
+                    }); 
+                })
+            }); 
+        }; 
+        $(".card").ready(start); 
+    </script>
+</body>
+
+</html>

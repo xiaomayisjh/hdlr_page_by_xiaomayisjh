@@ -1,0 +1,15 @@
+{
+  "name": "apple-personal-homepage",
+  "version": "1.0.0",
+  "description": "Apple 风格的优雅静态个人主页",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^9.3.0",
+    "fast-check": "^3.15.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}
